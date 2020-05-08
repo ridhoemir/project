@@ -1,29 +1,18 @@
 <?php
-//include file config.php
-include('config.php');
- 
-//jika benar mendapatkan GET id dari URL
-if(isset($_GET['IdCustomer'])){
-	//membuat variabel $id yang menyimpan nilai dari $_GET['id']
-	$IdCustomer = $_GET['IdCustomer'];
-	
-	//melakukan query ke database, dengan cara SELECT data yang memiliki id yang sama dengan variabel $id
-	$cek = mysqli_query($koneksi, "SELECT * FROM Customer WHERE IdCustomer='$IdCustomer'") or die(mysqli_error($koneksi));
-	
-	//jika query menghasilkan nilai > 0 maka eksekusi script di bawah
-	if(mysqli_num_rows($cek) > 0){
-		//query ke database DELETE untuk menghapus data dengan kondisi id=$id
-		$del = mysqli_query($koneksi, "DELETE FROM Customer WHERE IdCustomer='$IdCustomer'") or die(mysqli_error($koneksi));
-		if($del){
-			echo '<script>alert("Berhasil menghapus data."); document.location="index.php";</script>';
-		}else{
-			echo '<script>alert("Gagal menghapus data."); document.location="index.php";</script>';
-		}
-	}else{
-		echo '<script>alert("Data tidak ditemukan di database."); document.location="index.php";</script>';
-	}
-}else{
-	echo '<script>alert("Data tidak ditemukan di database."); document.location="index.php";</script>';
+include "config.php";
+$koneksi = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName); 
+if( $koneksi === false ) {
+    echo "Koneksi Gagal</br>";
+    die( print_r( mysqli_error($koneksi), true));
 }
- 
-?>
+$idcustomer = $_GET['idcustomer'];
+$tsql = "DELETE from customer WHERE idcustomer = '$idcustomer'";
+$stmt = mysqli_query($koneksi,$tsql);
+if( $stmt === false ) {
+    echo "Error in executing query.</br>";
+    die( print_r( mysqli_error($koneksi), true));
+}
+header('location:index.php');
+mysqli_free_result( $stmt);
+mysqli_close($koneksi);
+
