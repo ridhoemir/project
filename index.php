@@ -66,8 +66,8 @@ include('config.php');
 							<td>'.$data['Alamat'].'</td>
 							<td>'.$data['Nomor_Telepon'].'</td>
 							<td>
-								<a href="edit.php?id='.$data['IdCustomer'].'" class="badge badge-warning">Edit</a>
-								<a href="delete.php?id='.$data['IdCustomer'].'" class="badge badge-danger" onclick="return confirm(\'Yakin ingin menghapus data ini?\')">Delete</a>
+								<a href="edit.php?idcustomer='.$data['IdCustomer'].'" class="badge badge-warning">Edit</a>
+								<a href="delete.php?idcustomer='.$data['IdCustomer'].'" class="badge badge-danger" onclick="return confirm(\'Yakin ingin menghapus data ini?\')">Delete</a>
 							</td>
 						</tr>
 						';
