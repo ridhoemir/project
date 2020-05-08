@@ -31,62 +31,47 @@
 		<h2>Edit Customer</h2>
 		
 		<hr>
-		
-		<?php
-		//jika sudah mendapatkan parameter GET id dari URL
-		if(isset($_GET['IdCustomer'])){
-			//membuat variabel $id untuk menyimpan id dari GET id di URL
-			$IdCustomer = $_GET['IdCustomer'];
-			
-			//query ke database SELECT tabel mahasiswa berdasarkan id = $id
-			$select = mysqli_query($koneksi, "SELECT * FROM Customer WHERE IdCustomer='$idCustomer'") or die(mysqli_error($koneksi));
-			
-			//jika hasil query = 0 maka muncul pesan error
-			if(mysqli_num_rows($select) == 0){
-				echo '<div class="alert alert-warning">ID tidak ada dalam database</div>';
-				exit();
-			//jika hasil query > 0
-			}else{
-				//membuat variabel $data dan menyimpan data row dari query
-				$data = mysqli_fetch_assoc($select);
-			}
-		}
-		?>
-		
 		<?php
 		//jika tombol simpan di tekan/klik
 		if(isset($_POST['submit'])){
+			$IdCustomer     = $_POST['IdCustomer'];
 			$Nama			= $_POST['Nama'];
 			$Alamat	        = $_POST['Alamat'];
 			$Nomor_Telepon	= $_POST['Nomor_Telepon'];
 			
-			$sql = mysqli_query($koneksi, "UPDATE Customer SET Nama='$Nama', Alamat='$Alamat', Nomor_Telepon='$Nomor_Telepon' WHERE IdCustomer='$IdCustomer'") or die(mysqli_error($koneksi));
+			$sql = mysqli_query($koneksi, "UPDATE Customer SET IdCustomer='$IdCustomer', Nama='$Nama', Alamat='$Alamat', Nomor_Telepon='$Nomor_Telepon' WHERE IdCustomer='$IdCustomer'") or die(mysqli_error($koneksi));
 			
 			if($sql){
-				echo '<script>alert("Berhasil menyimpan data."); document.location="edit.php?id='.$IdCustomer.'";</script>';
+				echo '<script>alert("Berhasil menyimpan data."); document.location="edit.php?IdCustomer='.$IdCustomer.'";</script>';
 			}else{
 				echo '<div class="alert alert-warning">Gagal melakukan proses edit data.</div>';
 			}
 		}
 		?>
 		
-		<form action="edit.php?id=<?php echo $IdCustomer; ?>" method="post">
+		<form action="edit.php" method="post">
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Id Customer</label>
+				<div class="col-sm-10">
+					<input type="text" name="IdCustomer" class="form-control" required="true">
+				</div>
+			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">NAMA</label>
 				<div class="col-sm-10">
-					<input type="text" name="Nama" class="form-control" value="<?php echo $data['Nama']; ?>" required>
+					<input type="text" name="Nama" class="form-control" required="true">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Alamat</label>
 				<div class="col-sm-10">
-					<input type="text" name="Alamat" class="form-control" value="<?php echo $data['Alamat']; ?>" required>
+					<input type="text" name="Alamat" class="form-control" required="true">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nomor Telepon</label>
 				<div class="col-sm-10">
-                    <input type="text" name="Nomor_Telepon" class="form-control" value="<?php echo $data['Nomor_Telepon']; ?>"required>
+                    <input type="text" name="Nomor_Telepon" class="form-control" required="true">
 				</div>
 			</div>
 			<div class="form-group row">
