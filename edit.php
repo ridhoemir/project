@@ -34,15 +34,14 @@
 		<?php
 		//jika tombol simpan di tekan/klik
 		if(isset($_POST['submit'])){
-			$IdCustomer     = $_POST['IdCustomer'];
 			$Nama			= $_POST['Nama'];
 			$Alamat	        = $_POST['Alamat'];
 			$Nomor_Telepon	= $_POST['Nomor_Telepon'];
 			
-			$sql = mysqli_query($koneksi, "UPDATE Customer SET IdCustomer='$IdCustomer', Nama='$Nama', Alamat='$Alamat', Nomor_Telepon='$Nomor_Telepon' WHERE IdCustomer='$IdCustomer'") or die(mysqli_error($koneksi));
+			$sql = mysqli_query($koneksi, "UPDATE Customer SET  Nama='$Nama', Alamat='$Alamat', Nomor_Telepon='$Nomor_Telepon' WHERE IdCustomer= idcustomer") or die(mysqli_error($koneksi));
 			
 			if($sql){
-				echo '<script>alert("Berhasil menyimpan data."); document.location="edit.php?IdCustomer='.$IdCustomer.'";</script>';
+				echo '<script>alert("Berhasil menyimpan data."); document.location="edit.php?idcustomer=idcustomer";</script>';
 			}else{
 				echo '<div class="alert alert-warning">Gagal melakukan proses edit data.</div>';
 			}
@@ -50,12 +49,12 @@
 		?>
 		
 		<form action="edit.php" method="post">
-			<div class="form-group row">
+<!--			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Id Customer</label>
 				<div class="col-sm-10">
 					<input type="text" name="IdCustomer" class="form-control" required="true">
 				</div>
-			</div>
+			</div>-->
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">NAMA</label>
 				<div class="col-sm-10">
