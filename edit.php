@@ -51,7 +51,7 @@
 		
 		<form action="edit.php" method="post">
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Id Customer</label>
+				<label class="col-sm-2 col-form-label">ID CUSTOMER</label>
 				<div class="col-sm-10">
 					<input type="text" name="IdCustomer" class="form-control" required="true">
 				</div>
@@ -63,13 +63,13 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Alamat</label>
+				<label class="col-sm-2 col-form-label">ALAMAT</label>
 				<div class="col-sm-10">
 					<input type="text" name="Alamat" class="form-control" required="true">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Nomor Telepon</label>
+				<label class="col-sm-2 col-form-label">NOMOR TELEPON</label>
 				<div class="col-sm-10">
                     <input type="text" name="Nomor_Telepon" class="form-control" required="true">
 				</div>
