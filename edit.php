@@ -40,8 +40,7 @@
 			$Alamat	        = $_POST['Alamat'];
 			$Nomor_Telepon	= $_POST['Nomor_Telepon'];
 			$tsql = "UPDATE Customer SET  Nama='$Nama', Alamat='$Alamat', Nomor_Telepon='$Nomor_Telepon' WHERE IdCustomer = '$idcustomer'";
-			$sql = mysqli_query($koneksi, $tsql);
-			
+			$sql = mysqli_query($koneksi, $tsql) or die(mysqli_error($koneksi));
 			if($sql){
 				echo '<script>alert("Berhasil menyimpan data."); document.location="edit.php?idcustomer=idcustomer";</script>';
 			}else{
