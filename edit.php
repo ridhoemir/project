@@ -32,7 +32,6 @@
 		
 		<hr>
 		<?php
-	//	$koneksi = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName); 
 		//jika tombol simpan di tekan/klik
 		$idcustomer = $_GET['idcustomer'];
 		if(isset($_POST['submit'])){
@@ -54,11 +53,7 @@
 		
 		<form action="edit.php" method="post">
 			<div class="form-group row">
-<<<<<<< HEAD
 				<label class="col-sm-2 col-form-label">IDCustomer</label>
-=======
-				<label class="col-sm-2 col-form-label">ID CUSTOMER</label>
->>>>>>> e7e1843d09f00f9cff3c517dd045c69bc4357a53
 				<div class="col-sm-10">
 					<input type="text" name="IdCustomer" class="form-control" required="true" value=<?php echo $idcustomer ?> readonly> 
 				</div>
