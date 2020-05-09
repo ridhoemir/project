@@ -48,7 +48,7 @@ if(isset($_SESSION['customer'])){
   <?php
   include "navbar.php";
     include "user_login.php";
-    include "operator_login.php";
+    include "admin_login.php";
      ?>
         <!-- page content -->
         <div class="container">
@@ -84,8 +84,8 @@ if(isset($_SESSION['customer'])){
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <input type="text" id="first-name" name="id_book" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $nextID; ?>" readonly>
-                              <input type="hidden" id="first-name" required="required" name="username" class="form-control col-md-7 col-xs-12" value="<?php echo $sql_sel['username_member']; ?>" readonly>
-                              <input type="hidden" id="id_lap" name="id_lap" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $pilih['id_lap']; ?>" readonly>
+                              <input type="hidden" id="first-name" required="required" name="username" class="form-control col-md-7 col-xs-12" value="<?php echo $sql_sel['username_cust']; ?>" readonly>
+                              <input type="hidden" id="id_lap" name="id_lap" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $pilih['IdLapangan']; ?>" readonly>
                             </div>
                           </div>
                           <div class="form-group">
@@ -234,9 +234,9 @@ if(isset($_SESSION['customer'])){
 						$status = "Menunggu Pembayaran"; //maka status menjadi Menunggu pembayaran
 							}
 						//cek jam mulai diantara jam mulai dan jam berakhir yang telah ada di database
-						$cek1 = mysqli_fetch_array(mysqli_query($koneksi, "select * from transaksi where (IdLapangan = '$IdLapangan' && tgl_main='$tgl_main') && (jam_mulai<='$jam_mulai' && jam_berakhir>'$jam_mulai') && (status!='Dibatalkan' && status!='Selesai') order by tgl_book"));
+						$cek1 = mysqli_fetch_array(mysqli_query($koneksi, "select * from detail_penyewaan where (IdLapangan = '$IdLapangan' && tgl_main='$tgl_main') && (jam_mulai<='$jam_mulai' && jam_berakhir>'$jam_mulai') && (status!='Dibatalkan' && status!='Selesai') order by tgl_book"));
 						//cek jam mulai sebelum jam mulai di database, dan jam berakhir melebihi jam berakhir di database
-						$cek2 = mysqli_fetch_array(mysqli_query($koneksi, "select * from transaksi where (IdLapangan = '$IdLapangan' && tgl_main='$tgl_main') && (jam_mulai>'$jam_mulai' && jam_mulai<'$jam_selesai') && (status!='Dibatalkan' && status!='Selesai')  order by tgl_book"));
+						$cek2 = mysqli_fetch_array(mysqli_query($koneksi, "select * from detail_penyewaan where (IdLapangan = '$IdLapangan' && tgl_main='$tgl_main') && (jam_mulai>'$jam_mulai' && jam_mulai<'$jam_selesai') && (status!='Dibatalkan' && status!='Selesai')  order by tgl_book"));
 						
 						if($cek1 > 0){ //cek jam mulai diantara jam mulai dan jam berakhir yang telah ada di database
 							echo "<script> alert(\"Jam mulai yang anda pilih telah dipesan orang lain.\");</script>";	
@@ -249,12 +249,12 @@ if(isset($_SESSION['customer'])){
 						}elseif(strtotime($tgljam) - strtotime($tanggaljam) <= 10800){ // cek apakah waktu pesan kurang dari 3 jam dari waktu bermain
 							echo "<script> alert(\"Waktu minimal pemesanan adalah 3 jam\");</script>";
 						}else{ //jika tidak maka transaksi dapat dilanjutkan
-							$simpan = mysqli_query($koneksi, "insert into transaksi values ('$Nomor_Penyewaan','$username','$IdLapangan',NOW(),'$bayarakhir','$tgl_main','$jam_mulai','$jamdur:00:00','$jenis_bayar','$total','$status')");
+							$simpan = mysqli_query($koneksi, "insert into detail_penyewaan values ('$Nomor_Penyewaan','$username','$IdLapangan',NOW(),'$bayarakhir','$tgl_main','$jam_mulai','$jamdur:00:00','$jenis_bayar','$total','$status')");
 
 if($simpan & $jenis_bayar=='transfer'){ //jika simpan data berhasil dan jenis bayar = transfer 
-	echo "<script> alert(\"Silakan Lakukan Pembayaran\"); window.location = \"trans_upload_bayar.php?kd=$Nomor_Penyewaan\"; </script>";
+	echo "<script> alert(\"Silakan Lakukan Pembayaran\"); window.location = \"pembayaran_transfer.php?kd=$Nomor_Penyewaan\"; </script>";
 	} elseif($jenis_bayar=='cod') { // dan jika jenis bayar cod
-	echo "<script> alert(\"Segera Lakukan Pembayaran Kepada Operator Futsal Yang Dituju\"); window.location = \"index.php\"; </script>";
+	echo "<script> alert(\"Segera Lakukan Pembayaran Kepada Penyedia Lapangan Yang Dituju\"); window.location = \"index.php\"; </script>";
 		} else { //dan jika tidak
 		echo "<script> alert(\"Maaf, Terjadi Kesalahan...\"); window.location = \"index.php\"; </script>";		
 			}
@@ -345,7 +345,7 @@ if($simpan & $jenis_bayar=='transfer'){ //jika simpan data berhasil dan jenis ba
 </html>
 <?php 
 }else {
-    echo "<script> alert(\"Silakan Login Sebagai Member\"); window.location = \"index.php\" </script>";
+    echo "<script> alert(\"Silakan Login Sebagai Customer\"); window.location = \"index.php\" </script>";
   }
 ?>
    

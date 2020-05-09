@@ -58,7 +58,7 @@
     </div>
     <?php 
 	include ("config.php");
-	if(isset($_POST['loginadmint'])){
+	if(isset($_POST['loginadmin'])){
 		$username = $_POST['username'];
 		$email = $_POST['username'];
 		$password = $_POST['password'];

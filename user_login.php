@@ -1,4 +1,4 @@
-<div id="myModal" class="modal fade" role="dialog">
+<div id="cust_login" class="modal fade" role="dialog">
   <div class="modal-dialog modal-md">
 
     <!-- Modal content-->
@@ -7,22 +7,11 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Masuk SPOSITE</h4>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <div class="col-sm-offset-3 col-sm-9">
-              <h5>Masuk sebagai admin
-            </h5>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-9"><button type="submit" class="btn btn-success" data-toggle="modal" data-target="#Modal2" data-dismiss="modal"><span class="glyphicon glyphicon-user"></span>&nbsp; Administrator</button></h5></div>
-        </div>
         <br>
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-9">
               <p>
-                Atau masuk dengan akun SPOSITE anda
+                Masuk dengan akun SPOSITE Anda
               </p>
           </div>
         </div>
@@ -47,7 +36,7 @@
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
               <button type="submit" class="btn btn-primary" name="logincustomer"><span class="glyphicon glyphicon-log-in"></span>&nbsp; Masuk</button>
-              Atau <a href="member/member_daftar.php">Mendaftar!</a>
+              Atau <a href="user/user_daftar.php">Mendaftar!</a>
             </div>
           </div>
         </form>

@@ -127,7 +127,7 @@ if(isset($_SESSION['penyedia'])){
               <form class="navbar-form navbar-right">
               <a type="button" class="btn btn-success" href="user/user_daftar.php">Daftar</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;Atau Masuk sebagai &nbsp;
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Customer</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cust_login">Customer</button>
                 <a type="button" class="btn btn-danger" href="admin/adm_login.php">Administrator</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </form> 
