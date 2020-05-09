@@ -59,25 +59,25 @@
 		
 		<form action="tambah.php" method="post">
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">IdCustomer</label>
+				<label class="col-sm-2 col-form-label">ID CUSTOMER</label>
 				<div class="col-sm-10">
 					<input type="text" name="IdCustomer" class="form-control" size="4" required>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Nama</label>
+				<label class="col-sm-2 col-form-label">NAMA</label>
 				<div class="col-sm-10">
 					<input type="text" name="Nama" class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Alamat</label>
+				<label class="col-sm-2 col-form-label">ALAMAT</label>
 				<div class="col-sm-10">
 					<input type="text" name="Alamat" class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Nomor Telepon</label>
+				<label class="col-sm-2 col-form-label">NOMOR TELEPON</label>
 				<div class="col-sm-10">
                     <input type="text" name="Nomor_Telepon" class="form-control" required>
 				</div>

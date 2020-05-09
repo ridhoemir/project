@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <title>SPOSITE</title>
-  <link rel="shortcut icon" href="gambar/sporty.png"<SPOSITE>
+  <link rel="shortcut icon" href="gambar/sporty.png">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -16,7 +16,7 @@
     <style>
   	body { 
 			padding-top: 50px;
-			background-color:#AAA;	
+			background-color:#CCC;	
 	 }
     .modal-title {
       color: #424e5e;
@@ -25,13 +25,14 @@
       color: #870000;
     }
     
+    /* Add a gray background color and some padding to the footer */
     footer {
       background-color: #f2f2f2;
       padding: 25px;
     }
 
   .carousel-inner img {
-      width: px; /* Set width to 100% */
+      width: 500px; /* Set width to 100% */
       margin: auto;
       min-height:200px;
   }
@@ -52,11 +53,11 @@ $jam = date('H:i:s', time()+60*60*6); //variabel berisi jam sekarang
 $tanggaljam = date('Y-m-d H:i:s', time()+60*60*6); //variabel berisi tanggal dan jam sekarang
 //echo $tanggaljam;
 //$tanggaljam1 = '2016-12-30 10:00:00';
-$tanggal1 = '2020-05-08';
+$tanggal1 = '2017-01-01';
 //$jam1 = '10:00:00';
-$cekdetail = mysqli_query($koneksi,"select * from detail_penyewaan");
-$cek = mysqli_num_rows($cekdetail);
-$les = mysqli_fetch_array($cekdetail);
+$cektr = mysqli_query($koneksi,"select * from detail_penyewaan");
+$cek = mysqli_num_rows($cektr);
+$les = mysqli_fetch_array($cektr);
 
 if($cek > 0){
 //Dibatalkan jika bayar transfer dan telah melewati batas bayar
@@ -69,10 +70,10 @@ mysqli_query($koneksi, "update transaksi set status='Dibatalkan' where batas_bay
 mysqli_query($koneksi, "update transaksi set status='Selesai' where ((tgl_main <='$tanggal' && jam_berakhir <='$jam') || (tgl_main <='$tanggal' && jam_berakhir >='$jam')) && (status!='Dibatalkan' && status!='Selesai')");
 	}
 ?>
-    <?php
-    include "navbar.php";
-     include "user_login.php";
-     include "admin_login.php";
+  <?php
+  include "navbar.php";
+    include "user_login.php";
+    include "admin_login.php";
      ?>
 
 <div >
@@ -84,7 +85,7 @@ mysqli_query($koneksi, "update transaksi set status='Selesai' where ((tgl_main <
            <li data-target="#myCarousel" data-slide-to="2"></li>
            <li data-target="#myCarousel" data-slide-to="3"></li>
            <li data-target="#myCarousel" data-slide-to="4"></li>
-           <li data-target="#myCarousel" data-slide-to="5"></li>
+           <li data-target="#myCarousel" data-slide-to="5"></li>         
 		   
          </ol>
 
@@ -93,8 +94,6 @@ mysqli_query($koneksi, "update transaksi set status='Selesai' where ((tgl_main <
            <div class="item active">
              <img src="gambar/futsal1.jpg" alt="Image">
              <div class="carousel-caption">
-               <!--<h3>Pesan Lapangan</h3>
-               <p>Sekarang</p>-->
              </div>
            </div>
 
@@ -132,10 +131,11 @@ mysqli_query($koneksi, "update transaksi set status='Selesai' where ((tgl_main <
            <div class="item">
              <img src="gambar/badminton2.jpg" alt="Image">
              <div class="carousel-caption">
-              
+             <h3>Menuju sehat sekarang</h3>
+               <p>Atau tidak sama sekali!</p>
              </div>
            </div>
-           
+
          </div>
         
          <!-- Left and right controls -->
@@ -168,11 +168,11 @@ mysqli_query($koneksi, "update transaksi set status='Selesai' where ((tgl_main <
             <div class="w3-container" style="padding-bottom:10px">
             <form action="cari_filter.php" method="get">
              <h4 class="w3-center">Filter</h4>
-            <select class="w3-select" name="kategori">
+            <select class="w3-select" name="jenis">
               <option value="" selected>Kategori Lapangan</option>
-              <option value="sintetis">Futsal</option>
-              <option value="Beton/Semen">Badminton</option>
-              <option value="Beton/Semen">Basket</option>
+              <option value="Futsal">Futsal</option>
+              <option value="Basket">Basket</option>
+              <option value="Badminton">Badminton</option>
             </select>
              <br>
             <div style="padding-top:10px;">
@@ -198,10 +198,13 @@ mysqli_query($koneksi, "update transaksi set status='Selesai' where ((tgl_main <
     $posisi = ( $pg - 1 ) * $batas;
     }
 
-    $sql = mysqli_query($koneksi,"select lapangan.*, lapangan.nama_lapangan,lapangan.Nomor_Lapangan,lapangan.status,lapangan.harga from lapangan limit $posisi, $batas");
+    $sql = mysqli_query($koneksi,"select lapangan.*, lapangan.Nama_Lapangan, Lapangan.Nomor_Lapangan, Lapangan.kode_tarif from lapangan inner join tarif on (lapangan.kode_tarif=tarif.kode_tarif) limit $posisi, $batas");
     $no = 1+$posisi;
-    while ($r = mysqli_fetch_array($sql)) {
+    while ( $r = mysqli_fetch_array( $sql ) ) {
     ?>
+    
+    
+      
         
     <div class="w3-container w3-card-2 w3-white w3-round" style="margin-left: 10px; margin-top:10px;"><br>
          
@@ -210,17 +213,16 @@ mysqli_query($koneksi, "update transaksi set status='Selesai' where ((tgl_main <
                   <img src="gambar/<?php echo $r['foto']; ?>" style="width:100%; min-height:100%;" alt="Northern Lights" class="w3-margin-bottom">
                 </div>
                 <form action="penyewaan.php" method="post">
-                <input type="hidden" name="IdLapangan" value="<?php echo $r['IdLapangan']; ?>">
+                <input type="hidden" name="id_lap" value="<?php echo $r['id_lap']; ?>">
                 <div class="w3-half">
                   <i class="fa fa-home" aria-hidden="true"></i>&nbsp;<?php echo $r['Nama_Lapangan']; ?><br><br>
                   <i class="fa fa-list-alt" aria-hidden="true"></i> Lapangan Nomor&nbsp;<?php echo $r['Nomor_Lapangan']; ?><br><br>
-                  <i class="fa fa-tags" aria-hidden="true"></i> Rp. <?php echo $r['harga']; ?> per jam<br><br><br><br>
-                  <i class="fa fa-tags" aria-hidden="true"></i> Status: <?php echo $r['status']; ?><br><br><br><br>
+                  <i class="fa fa-tags" aria-hidden="true"></i> Rp. <?php echo $r['kode_tarif']; ?> per jam<br><br><br><br>
                   
               </div>
               <div class="w3-right">
 
-            <button type="submit" class="w3-btn w3-teal w3-margin-bottom"><i class="glyphicon glyphicon-book"></i>Pesan</button>
+            <button type="submit" class="w3-btn w3-teal w3-margin-bottom"><i class="glyphicon glyphicon-book"></i>  Pesan</button>
             </form>
             </div>
             </div>
@@ -294,7 +296,10 @@ mysqli_query($koneksi, "update transaksi set status='Selesai' where ((tgl_main <
 		  
 	 ?>
 
+        </div>
+
       </div>
+
     </div>
     <br>
            </div>
