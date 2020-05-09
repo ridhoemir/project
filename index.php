@@ -12,7 +12,7 @@ include('config.php');
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container">
-			<img alt="Gambar Liverpool" src="gambar/sporty.png" height="70" width="70"/>
+			<img alt="GambarSPOSITE" src="gambar/sporty.png" height="70" width="70"/>
 			<a class="navbar-brand" href="#">SPOSITE</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -40,7 +40,7 @@ include('config.php');
 			<thead class="thead-dark">
 				<tr>
 					<th>NO.</th>
-                    <th>IdCustomer</th>
+                    <th>ID CUSTOMER</th>
 					<th>NAMA</th>
 					<th>ALAMAT</th>
 					<th>NOMOR TELEPON</th>
