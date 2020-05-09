@@ -49,7 +49,11 @@ include('config.php');
 			</thead>
 			<tbody>
 				<?php
+<<<<<<< HEAD
 				//query ke database SELECT tabel mahasiswa urut berdasarkan id yang paling besar
+=======
+
+>>>>>>> 7d07daeeb6aad835925bf0d17f13afb05146f90c
 				$sql = mysqli_query($koneksi, "SELECT * FROM customer ORDER BY IdCustomer ASC") or die(mysqli_error($koneksi));
 				//jika query diatas menghasilkan nilai > 0 maka menjalankan script di bawah if
 				if(mysqli_num_rows($sql) > 0){
