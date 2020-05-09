@@ -32,13 +32,16 @@
 		
 		<hr>
 		<?php
+	//	$koneksi = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName); 
 		//jika tombol simpan di tekan/klik
+		$idcustomer = $_GET['idcustomer'];
 		if(isset($_POST['submit'])){
+			$idcustomer 	= $_POST['IdCustomer'];
 			$Nama			= $_POST['Nama'];
 			$Alamat	        = $_POST['Alamat'];
 			$Nomor_Telepon	= $_POST['Nomor_Telepon'];
-			
-			$sql = mysqli_query($koneksi, "UPDATE Customer SET  Nama='$Nama', Alamat='$Alamat', Nomor_Telepon='$Nomor_Telepon' WHERE IdCustomer= idcustomer") or die(mysqli_error($koneksi));
+			$tsql = "UPDATE Customer SET  Nama='$Nama', Alamat='$Alamat', Nomor_Telepon='$Nomor_Telepon' WHERE IdCustomer = '$idcustomer'";
+			$sql = mysqli_query($koneksi, $tsql);
 			
 			if($sql){
 				echo '<script>alert("Berhasil menyimpan data."); document.location="edit.php?idcustomer=idcustomer";</script>';
@@ -46,19 +49,20 @@
 				echo '<div class="alert alert-warning">Gagal melakukan proses edit data.</div>';
 			}
 		}
+		mysqli_close($koneksi);
 		?>
 		
 		<form action="edit.php" method="post">
-<!--			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Id Customer</label>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">IDCustomer</label>
 				<div class="col-sm-10">
-					<input type="text" name="IdCustomer" class="form-control" required="true">
+					<input type="text" name="IdCustomer" class="form-control" required="true" value=<?php echo $idcustomer ?> readonly> 
 				</div>
-			</div>-->
+			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">NAMA</label>
 				<div class="col-sm-10">
-					<input type="text" name="Nama" class="form-control" required="true">
+					<input type="text" name="Nama" class="form-control" >
 				</div>
 			</div>
 			<div class="form-group row">
@@ -81,7 +85,6 @@
 				</div>
 			</div>
 		</form>
-		
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

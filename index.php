@@ -50,7 +50,7 @@ include('config.php');
 			<tbody>
 				<?php
 				//query ke database SELECT tabel mahasiswa urut berdasarkan id yang paling besar
-				$sql = mysqli_query($koneksi, "SELECT * FROM customer ORDER BY IdCustomer DESC") or die(mysqli_error($koneksi));
+				$sql = mysqli_query($koneksi, "SELECT * FROM customer ORDER BY IdCustomer ASC") or die(mysqli_error($koneksi));
 				//jika query diatas menghasilkan nilai > 0 maka menjalankan script di bawah if
 				if(mysqli_num_rows($sql) > 0){
 					//membuat variabel $no untuk menyimpan nomor urut
@@ -66,7 +66,7 @@ include('config.php');
 							<td>'.$data['Alamat'].'</td>
 							<td>'.$data['Nomor_Telepon'].'</td>
 							<td>
-								<a href="edit.php?idcustomer='.$data['IdCustomer'].'" class="badge badge-warning">Edit</a>
+								<a href="edit.php?idcustomer='.$data['IdCustomer'].'" class="badge badge-warning" >Edit</a>
 								<a href="delete.php?idcustomer='.$data['IdCustomer'].'" class="badge badge-danger" onclick="return confirm(\'Yakin ingin menghapus data ini?\')">Delete</a>
 							</td>
 						</tr>
